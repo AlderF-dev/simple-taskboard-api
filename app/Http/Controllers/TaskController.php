@@ -9,6 +9,7 @@ use App\Actions\Tasks\UpdateTaskAction;
 use App\Http\Requests\DeleteTaskRequest;
 use App\Http\Requests\GetTasksRequest;
 use App\Http\Requests\StoreTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use App\Http\Resources\TaskCollection;
 use App\Models\Task;
 use Illuminate\Support\Facades\Log;
@@ -34,11 +35,13 @@ class TaskController extends Controller
     }
 
     public function update(
-        StoreTaskRequest $request,
+        UpdateTaskRequest $request,
         Task $task,
         UpdateTaskAction $updateTaskAction
     ) {
         $data = $request->all();
+
+        Log::debug($data);
 
         return $updateTaskAction->execute($task, $data);
     }

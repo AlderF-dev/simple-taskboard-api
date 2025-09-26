@@ -11,7 +11,7 @@ class UpdateTaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class UpdateTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['string'],
+            'description' => ['nullable', 'string'],
+            'tags' => ['nullable', 'array'],
+            'completed' => ['nullable', 'boolean'],
         ];
     }
 }
