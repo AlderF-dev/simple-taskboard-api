@@ -14,7 +14,7 @@ class GetTasksAction
         int $page = 1
     ): Collection {
 
-        return Task::all();
+        return Task::with('tags')->get();
 
         // return new LengthAwarePaginator(
         //     total: $tasks->count(),

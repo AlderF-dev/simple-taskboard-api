@@ -9,21 +9,11 @@ use Illuminate\Support\Facades\Log;
 
 class StoreTaskAction
 {
-    public function __construct(
-        protected StoreAttachTagsAction $storeAttachTagsAction
-    ) {}
-
     public function execute(array $data): Task
     {
-        $newTask = Task::create([
+        return Task::create([
             'title' => $data['title'],
-            'description' => $data['description'],
+            'description' => $data['description'] ?? null,
         ]);
-
-        if (isset($data['tags'])) {
-            $this->storeAttachTagsAction->execute($newTask, $data['tags']);
-        }
-
-        return $newTask;
     }
 }

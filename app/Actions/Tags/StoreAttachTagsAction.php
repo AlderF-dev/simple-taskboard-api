@@ -10,21 +10,12 @@ class StoreAttachTagsAction
 {
     public function execute(Task $task, array $tags)
     {
-        foreach ($tags as $tag) {
-            // Get or create the tag
-            $newTag = Tag::firstOrCreate(['label' => $tag]);
+        // Map input labels to tag IDs
+        $tagIds = collect($tags)->map(function ($label) {
+            return Tag::firstOrCreate(['label' => $label])->id;
+        })->toArray();
 
-            $currentTags = $task->tags;
-
-            // If attached but not in $tags, deattach
-            if ($currentTags->contains($newTag->id) && !in_array($newTag->label, $tags)) {
-                $task->tags()->detach($newTag);
-            }
-
-            // If not attached and in $tags, attach
-            if (!$currentTags->contains($newTag->id) && in_array($newTag->label, $tags)) {
-                $task->tags()->attach($newTag);
-            }
-        }
+        // Sync tags: attach new ones, detach missing ones
+        $task->tags()->sync($tagIds);
     }
 }

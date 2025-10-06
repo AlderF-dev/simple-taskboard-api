@@ -4,8 +4,21 @@
 ![PHP](https://img.shields.io/badge/PHP-^8.2-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-A clean and simple RESTful API built with **Laravel** to demonstrate backend development practices.
-This project showcases routing, database integration, and API structure, and is designed to be consumed by a sample frontend application.
+---
+
+## Why This Project
+
+This project was created as a **backend showcase** to demonstrate my ability to design and implement RESTful APIs using **Laravel 12**.
+It highlights clean architecture, structured routing, database design, and controller logic following Laravel best practices.
+The goal is to provide a solid and maintainable backend that cleanly integrates with a modern frontend built in **React + TypeScript**, showcasing a complete full-stack workflow.
+
+Key focuses:
+
+-   RESTful API design principles
+-   Database migrations, models, and relationships
+-   Clear and consistent route definitions
+-   Scalable structure ready for authentication and advanced features
+-   Easy integration with external clients (frontend apps or Postman)
 
 ---
 
