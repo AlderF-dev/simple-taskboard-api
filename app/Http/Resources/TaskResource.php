@@ -15,13 +15,13 @@ class TaskResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        Log::debug($this->whenLoaded('tags'));
+        Log::debug($this->tags()->get());
         return [
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
             'completed' => $this->completed,
-            'tags' => $this->whenLoaded('tags', TagResource::collection($this->tags()->get() ?? []), 'null'),
+            'tags' => TagResource::collection($this->tags()->get()) ?? null,
             'created_at' => $this->created_at->format('Y/m/d H:i:s'),
         ];
     }

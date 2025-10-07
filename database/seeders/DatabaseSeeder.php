@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Tag;
 use App\Models\Task;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -21,7 +22,14 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
+        //Create Tags
+        $tags = Tag::factory()->count(12)->create();
 
-        Task::factory()->count(5)->create();
+        // Create Tasks
+        Task::factory()->count(6)->create()->each(function ($task) use ($tags) {
+            $randomTags = $tags->random(rand(0, 5))->pluck('id');
+
+            $task->tags()->syncWithoutDetaching($randomTags);
+        });
     }
 }
