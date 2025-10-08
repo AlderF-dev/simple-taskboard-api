@@ -21,7 +21,7 @@ class TaskResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'completed' => $this->completed,
-            'tags' => TagResource::collection($this->tags()->get()) ?? null,
+            'tags' => $this->tags()->pluck('label') ?? null,
             'created_at' => $this->created_at->format('Y/m/d H:i:s'),
         ];
     }

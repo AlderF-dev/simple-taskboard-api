@@ -1,6 +1,6 @@
 #! /bin/sh
-
-# LOOKUP Gosu when running on windows WSL2
+groupmod -g ${HOST_GID:-1000} www-data
+usermod -u  ${HOST_UID:-1000} -g  ${HOST_GID:-1000} www-data
 
 # Start cron
 crond

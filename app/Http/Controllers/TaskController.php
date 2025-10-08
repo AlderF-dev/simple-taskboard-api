@@ -7,10 +7,10 @@ use App\Actions\Tasks\DeleteTaskAction;
 use App\Actions\Tasks\GetTasksAction;
 use App\Actions\Tasks\StoreTaskAction;
 use App\Actions\Tasks\UpdateTaskAction;
-use App\Http\Requests\DeleteTaskRequest;
-use App\Http\Requests\GetTasksRequest;
-use App\Http\Requests\StoreTaskRequest;
-use App\Http\Requests\UpdateTaskRequest;
+use App\Http\Requests\Task\DeleteTaskRequest;
+use App\Http\Requests\Task\GetTasksRequest;
+use App\Http\Requests\Task\StoreTaskRequest;
+use App\Http\Requests\Task\UpdateTaskRequest;
 use App\Http\Resources\TaskCollection;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
@@ -24,7 +24,7 @@ class TaskController extends Controller
         GetTasksRequest $request,
         GetTasksAction $getTasksAction
     ) {
-        $data = $getTasksAction->execute();
+        $data = $getTasksAction->execute($request->user());
 
         return new TaskCollection($data);
     }

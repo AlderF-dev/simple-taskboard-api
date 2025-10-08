@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
         $tags = Tag::factory()->count(12)->create();
 
         // Create Tasks
-        Task::factory()->count(6)->create()->each(function ($task) use ($tags) {
-            $randomTags = $tags->random(rand(0, 5))->pluck('id');
+        Task::factory()->count(6)->for($user)->create()->each(function ($task) use ($tags) {
+            $randomTags = $tags->shuffle()->take(rand(0, 5))->pluck('id');
 
             $task->tags()->syncWithoutDetaching($randomTags);
         });

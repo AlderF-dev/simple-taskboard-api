@@ -8,6 +8,7 @@ WORKDIR /var/www
 
 # Install packages (nginx, supervisor)
 RUN apk update && apk add --no-cache \
+    gosu \
     nginx \
     nginx-mod-http-headers-more \
     supervisor
